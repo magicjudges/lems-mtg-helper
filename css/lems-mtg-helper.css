@@ -1,0 +1,227 @@
+/* ---------->>> jtip <<<---------------------------------------------------------------*/
+#JT_close_left, #JT_close_right {
+    font-size: 1.1em;
+}
+
+#JT_copy p, #JT_copy ul {
+    font-size: 1.1em;
+}
+
+#JT_arrow {
+    position: absolute;
+    background: no-repeat left top;
+    z-index: 101;
+}
+
+.JT_arrow_top {
+    height: 23px;
+    width: 10px;
+    top: -3px;
+}
+
+.JT_arrow_bottom {
+    height: 23px;
+    width: 10px;
+    top: 266px;
+}
+
+#JT {
+    position: absolute;
+    z-index: 100;
+    border: 0 solid #000;
+    width: 223px;
+    height: 310px;
+    background: transparent url(../images/missing.jpg) no-repeat left top;
+}
+
+#JT_copy {
+    padding: 0;
+    color: #333333;
+}
+
+#JT_copy p {
+    margin: 3px 0;
+}
+
+#JT_copy img {
+    padding: 0;
+}
+
+.jTip {
+    cursor: hand;
+    white-space: nowrap;
+}
+
+/*=======================================MTG HELPER=============================================*/
+
+.mtgh {
+    border: 0 solid;
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+    text-align: left;
+}
+
+/*================ HEADER OPTIONS ==================*/
+
+.mtgh .header_options {
+    float: right;
+    margin-right: 3px;
+    color: #000000;
+    text-decoration: none;
+}
+
+.mtgh .header_options a {
+    font-size: 11px;
+    color: #000000;
+    text-decoration: none;
+}
+
+/*================ POOLHEADER ==================*/
+
+.mtgh .header {
+    margin: 0;
+    padding: 3px 0;
+}
+
+.mtgh .header h4 {
+    font-weight: bold;
+    font-size: 150%;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
+.mtgh .header h4 hr {
+    padding: 0;
+    margin: 0;
+}
+
+.mtgh .header a {
+    text-align: right;
+    font-weight: normal;
+    font-size: 90%;
+    padding: 0;
+    margin: 0;
+}
+
+/*================ POOLTABS ==================*/
+
+.mtgh .tab {
+    background: #CCCCCC;
+}
+
+.mtgh .tab ul {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.mtgh .tab li {
+    float: left;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+.mtgh .tab li a {
+    display: block;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+}
+
+.mtgh .tab li a:hover {
+    text-decoration: underline;
+}
+
+/*================ CARDLIST ==================*/
+
+.mtgh .content {
+    /*margin:3px 3px 0 3px;*/
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+}
+
+.mtgh .content td {
+    vertical-align: top;
+    margin: 0;
+    padding: 0;
+}
+
+.mtgh .content ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+.mtgh .content li {
+    line-height: 110%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.mtgh .content a {
+    text-decoration: none;
+}
+
+/*================ CARDBOX==================*/
+
+.mtgh .card_box {
+    margin: 0;
+    padding: 0;
+    width: 223px;
+    height: 310px;
+}
+
+.mtgh .card_box img {
+    margin: 0;
+    padding: 0;
+}
+
+.mtgh .card_box table {
+    border-spacing: 0;
+}
+
+.mtgh .card_box table td {
+    padding: 0;
+    margin: 0;
+}
+
+.mtgh .display_preview {
+    vertical-align: middle;
+    width: 223px;
+    height: 310px;
+
+    padding: 0;
+    margin: 0;
+    background: #DCDCDC url(../images/missing.jpg) no-repeat left top;
+}
+
+/*================ STYLE IMG ==================*/
+
+.mtgh .thumbnail {
+    margin: 0;
+    padding: 0;
+}
+
+img.cardpick_border {
+    border: 2px solid red;
+}
+
+a.cardpick_border {
+    color: red;
+    font-weight: bold;
+}
+
+img.lems-mtg-cardimg {
+    margin: 12px;
+}
