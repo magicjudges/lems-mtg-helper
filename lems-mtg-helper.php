@@ -44,7 +44,6 @@ function mtgh_init()
 {
 	if (function_exists('wp_enqueue_script')) {
 		wp_enqueue_script('mtgh', get_bloginfo('wpurl') . LEMS_MTG_DIR . '/js/jtip.js', array('jquery'), '2.13a.4');
-		wp_enqueue_script('dimension', get_bloginfo('wpurl') . LEMS_MTG_DIR . '/js/jquery.dimension.min.js', array('jquery'), '1.0');
 		wp_enqueue_style('mtg_helper_style', get_bloginfo('wpurl') . LEMS_MTG_DIR . '/css/lems-mtg-helper.css', array(), '1.0');
 	} else {
 		add_action('wp_head', 'init_header');
