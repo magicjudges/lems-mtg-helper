@@ -28,34 +28,35 @@ Author URI: http://www.jasonlemahieu.com
 
 include 'lems-mtg-helper-cardfinder.php';
 
-if ( ! defined( 'WP_CONTENT_URL' ) )
-	define('WP_CONTENT_URL', get_option( 'url' ) . '/wp-content');
-if ( ! defined( 'WP_CONTENT_DIR' ) )
+if (!defined('WP_CONTENT_URL'))
+	define('WP_CONTENT_URL', get_option('url') . '/wp-content');
+if (!defined('WP_CONTENT_DIR'))
 	define('WP_CONTENT_DIR', ABSPATH . 'wp-content');
-if ( ! defined( 'WP_CONTENT_FOLDER' ) )
-	define('WP_CONTENT_FOLDER', str_replace( ABSPATH, '/', WP_CONTENT_DIR ));
+if (!defined('WP_CONTENT_FOLDER'))
+	define('WP_CONTENT_FOLDER', str_replace(ABSPATH, '/', WP_CONTENT_DIR));
 define('LEMS_MTG_DIR', WP_CONTENT_FOLDER . '/plugins/lems-mtg-helper');
 
-if ( ! is_admin() ) {
-	add_action( 'init', 'mtgh_init' );
+if (!is_admin()) {
+	add_action('init', 'mtgh_init');
 }
 
-function mtgh_init() {
-	if ( function_exists( 'wp_enqueue_script' ) ) {
-		wp_enqueue_script( 'jquery' );
-		wp_enqueue_script( 'mtgh', get_bloginfo( 'wpurl' ) . LEMS_MTG_DIR . '/js/jtip.js', array('jquery'), '2.13a.4' );
-		wp_enqueue_script( 'dimnesions', get_bloginfo( 'wpurl' ) . LEMS_MTG_DIR . '/js/jquery.dimension.min.js', array('jquery'), '1.0' );
-		wp_enqueue_style( 'mtg_helper_style', get_bloginfo( 'wpurl' ) . LEMS_MTG_DIR . '/css/lems-mtg-helper.css', array(), '1.0' );
+function mtgh_init()
+{
+	if (function_exists('wp_enqueue_script')) {
+		wp_enqueue_script('mtgh', get_bloginfo('wpurl') . LEMS_MTG_DIR . '/js/jtip.js', array('jquery'), '2.13a.4');
+		wp_enqueue_script('dimension', get_bloginfo('wpurl') . LEMS_MTG_DIR . '/js/jquery.dimension.min.js', array('jquery'), '1.0');
+		wp_enqueue_style('mtg_helper_style', get_bloginfo('wpurl') . LEMS_MTG_DIR . '/css/lems-mtg-helper.css', array(), '1.0');
 	} else {
-		add_action( 'wp_head', 'init_header' );
+		add_action('wp_head', 'init_header');
 	}
 }
 
-function init_header() {
-	$tooltip_url = get_bloginfo( 'wpurl' ) . LEMS_MTG_DIR . '/js/jtip.js';
-	$dimension_url = get_bloginfo( 'wpurl' ) . LEMS_MTG_DIR . '/js/jquery.dimensions.min.js.js';
-	$jquery_url = get_bloginfo( 'wpurl' ) . '/wp-includes/js/jquery/jquery.js';
-	$css_url = get_bloginfo( 'wpurl' ) . LEMS_MTG_DIR . '/css/lems-mtg-helper.css';
+function init_header()
+{
+	$tooltip_url = get_bloginfo('wpurl') . LEMS_MTG_DIR . '/js/jtip.js';
+	$dimension_url = get_bloginfo('wpurl') . LEMS_MTG_DIR . '/js/jquery.dimensions.min.js.js';
+	$jquery_url = get_bloginfo('wpurl') . '/wp-includes/js/jquery/jquery.js';
+	$css_url = get_bloginfo('wpurl') . LEMS_MTG_DIR . '/css/lems-mtg-helper.css';
 	?>
 	<script type="text/javascript" src="<?php echo $tooltip_url ?>"></script>
 	<script type="text/javascript" src="<?php echo $jquery_url ?>"></script>
@@ -64,20 +65,22 @@ function init_header() {
 <?php
 }
 
-function cache_cards( $names ) {
+function cache_cards($names)
+{
 	$images = array();
-	if ( is_string( $names ) ) {
-		$images[] = "<img src='" . get_source_from_name( $names ) . "' style='display:none;width:1px;height:1px;' />";
+	if (is_string($names)) {
+		$images[] = "<img src='" . get_source_from_name($names) . "' style='display:none;width:1px;height:1px;' />";
 	} else {
-		foreach ( $names as $cardname ) {
-			$images[] = "<img src='" . get_source_from_name( $cardname ) . "' style='display:none;width:1px;height:1px;' />";
+		foreach ($names as $cardname) {
+			$images[] = "<img src='" . get_source_from_name($cardname) . "' style='display:none;width:1px;height:1px;' />";
 		}
 	}
-	return implode( "", $images );
+	return implode("", $images);
 }
 
-function lems_mtg_quicktags() {
-	if ( wp_script_is( 'quicktags' ) ) {
+function lems_mtg_quicktags()
+{
+	if (wp_script_is('quicktags')) {
 		?>
 		<script type="text/javascript">
 			QTags.addButton('card', 'MTG Hover', '[card]', '[/card]');
@@ -87,43 +90,45 @@ function lems_mtg_quicktags() {
 	}
 }
 
-function lems_mtg_shortcode_cardimg( $atts, $content = null ) {
-	extract( shortcode_atts( array(
+function lems_mtg_shortcode_cardimg($atts, $content = null)
+{
+	extract(shortcode_atts(array(
 		'align' => '',
 		'set' => ''
-	), $atts ) );
-	$align = strtolower( $align );
+	), $atts));
+	$align = strtolower($align);
 
-	if ( $align && in_array( $align, array('left', 'right', 'center') ) ) {
-		$align_html = " style='float:" . esc_html( $align ) . "' ";
+	if ($align && in_array($align, array('left', 'right', 'center'))) {
+		$align_html = " style='float:" . esc_html($align) . "' ";
 	} else {
 		$align_html = '';
 	}
 
-	$src = get_source_from_name( sanitize_text_field( $content ), sanitize_text_field( $set ) );
+	$src = get_source_from_name(sanitize_text_field($content), sanitize_text_field($set));
 	return "<p><img $align_html class='lems-mtg-cardimg' src='" . $src . "'></p>";
 }
 
-function mtg_card_hover( $atts, $content ) {
-	extract( shortcode_atts( array(
+function mtg_card_hover($atts, $content)
+{
+	extract(shortcode_atts(array(
 		'text' => $content,
 		'set' => ''
-	), $atts ) );
+	), $atts));
 
 	$query = array(
-		'find' => sanitize_text_field( $content ),
+		'find' => sanitize_text_field($content),
 		'width' => 223,
 		'height' => 310
 	);
-	if ( $set ) {
-		$query['set'] = sanitize_text_field( $set );
+	if ($set) {
+		$query['set'] = sanitize_text_field($set);
 	}
 
-	return '<a href="' . get_bloginfo( 'wpurl' ) . LEMS_MTG_DIR
-	. '/lems-mtg-helper-cardfinder.php?' . http_build_query( $query ) . '" class="jTip" name="">'
+	return '<a href="' . get_bloginfo('wpurl') . LEMS_MTG_DIR
+	. '/lems-mtg-helper-cardfinder.php?' . http_build_query($query) . '" class="jTip" name="">'
 	. wp_kses_post($text) . '</a>';
 }
 
-add_action( 'admin_print_footer_scripts', 'lems_mtg_quicktags', 100 );
-add_shortcode( 'cardimg', 'lems_mtg_shortcode_cardimg' );
-add_shortcode( 'card', 'mtg_card_hover' );
+add_action('admin_print_footer_scripts', 'lems_mtg_quicktags', 100);
+add_shortcode('cardimg', 'lems_mtg_shortcode_cardimg');
+add_shortcode('card', 'mtg_card_hover');
